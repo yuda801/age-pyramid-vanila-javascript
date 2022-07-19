@@ -12,6 +12,7 @@ form {
     display: flex;
     flex-direction: column;
     margin: auto;
+    align-items: center;
 }
 
 #pyramid-draw{
@@ -26,7 +27,13 @@ form {
 .card{
     width: 20%;
     background-color: rgb(165, 213, 213);
+    align-items: center;
 }
 button{
     width: fit-content;
+}
+
+#age-continer{
+    display: flex;
+    justify-content: space-between;
 }

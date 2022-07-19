@@ -1,18 +1,17 @@
-//The naive solution:
-//
 
 let pyramid
+//Handle form of adding submit button
 const handleSubmit = (event) => {
     event.preventDefault()
     let genderInput = document.getElementById("gender-input")
     let genderValue = genderInput.options[genderInput.selectedIndex].text;
     let ageInput = document.getElementById("age-input").value
+    
     if (genderValue === 'Enter Gender') { alert("please enter gender"); return; }
-    if (ageInput === '') { alert("please enter age"); return; }
-    if (ageInput <= 0) { alert("age cant be less than 1"); return; }
-    if (ageInput >= 120) { alert("age can't be more than 120"); return; }
-    console.log("gender is :" + genderValue)
-    console.log("age is: " + ageInput)
+    if (ageInput === '') { alert("Please enter age"); return; }
+    if (ageInput <= 0) { alert("Age can't be less than 1"); return; }
+    if (ageInput >= 120) { alert("Age can't be more than 120"); return; }
+
     let temp = {
         gender: genderValue,
         age: ageInput
@@ -35,6 +34,7 @@ const buildPyramid = () => {
 }
 buildPyramid()
 
+//Add an element to the pyramid
 const addElement = (element) => {
     if (element.age <= 10) { pyramid.toTen = [...pyramid.toTen, element]; }
     else if (element.age <= 20) { pyramid.toTwenty = [...pyramid.toTwenty, element]; }
@@ -44,6 +44,7 @@ const addElement = (element) => {
     else if (element.age <= 120) { pyramid.toHundard20 = [...pyramid.toHundard20, element]; }
 }
 
+//Add a single element to the table
 const print = (count, gender, age) => {
     document.getElementById("table-body").innerHTML +=
         `<tr>
@@ -53,6 +54,7 @@ const print = (count, gender, age) => {
         </tr>`
 }
 
+// Draw the phisical shape of the pyramid
 const drawPyramid = () => {
     document.getElementById("pyramid-draw").innerHTML = ""
 
@@ -114,6 +116,7 @@ const getByGender = () => {
         }
     }
 }
+
 const getByAgeAndGender = () => {
     document.getElementById("table-body").innerHTML = ''
     let searchAgeInput = document.getElementById("age-search").value
@@ -122,7 +125,6 @@ const getByAgeAndGender = () => {
 
     if (searchGenderInput === "Choose Gender") { alert("please enter gender"); return; }
     if (searchAgeInput === '') { alert('please enter age'); return; }
-
 
     let size = Object.keys(pyramid).length;
     let counter = 0
