@@ -2,42 +2,103 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible"
-        content="IE=edge">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-    <title>age pyramid</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible"
+    content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="style.css">
+  <title>age pyramid</title>
 </head>
 
 <body>
-    <div class="container">
-    <h1>Age Pyramid</h1>
-
-    <form >
-        <select class="form-select" aria-label="Default select example" id="gender-input">
-            <option selected>Enter Gender</option>
-            <option value="1">Male</option>
-            <option value="2">Female</option>
-          </select>
-        <div class="mb-3" id="row">
-          <label for="ageInput" class="form-label">Age </label>
-          <input type="number" class="form-control" id="age-input" placeholder="enter the age" name="age-input" min="1" max="120">
-        </div>
-        <button onclick="handleSubmit(event)" class="btn btn-primary">Submit</button>
+  <div class="container">
+    <form>
+      <h1>Age Pyramid</h1>
+      <select class="form-select"
+        aria-label="Default select example"
+        id="gender-input">
+        <option selected>Choose Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      <div class="mb-3"
+        id="row">
+        <label for="ageInput"
+          class="form-label">Age </label>
+        <input type="number"
+          class="form-control"
+          id="age-input"
+          placeholder="enter the age"
+          name="age-input"
+          min="1"
+          max="120">
+      </div>
+      <button onclick="handleSubmit(event)"
+        class="btn btn-primary">Submit</button>
       </form>
-    </div>
-    <div id="pyramid-draw">
+      <div id="pyramid-draw">
 
-    </div>
+      </div>
+      
 
-      <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <div class="card"
+      style="width: 18rem;">
+      <h1>find elements</h1>
+      <div class="mb-3">
+        <label for="age-search"
+          class="form-label">Age</label>
+        <input type="number"
+          class="form-control"
+          id="age-search">
+      </div>
+      <select class="form-select"
+        aria-label="Default select example"
+        id="gender-search">
+        <option selected>Choose Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      <button type="button"
+        class="btn btn-dark"
+        onclick="getAll()">Get all elements</button>
+      <button type="button"
+        class="btn btn-warning"
+        onclick="getByAge()">Get by age</button>
+      <button type="button"
+        class="btn btn-info"
+        onclick="getByGender()">Get by Gender</button>
+      <button type="button"
+        class="btn btn-light"
+        onclick="getByAgeAndGender()">Get by age and gender</button>
+    </div>
+  </div>
+
+  <div class="table">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Age</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+
 </body>
 
 </html>

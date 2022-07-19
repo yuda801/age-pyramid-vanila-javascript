@@ -1,34 +1,28 @@
-// import { pyramidModel } from "./models/pyramidModel";
-// import { elementModel } from "./models/elementModel";
+//The naive solution:
+//
+
+let pyramid
 const handleSubmit = (event) => {
     event.preventDefault()
     let genderInput = document.getElementById("gender-input")
-    // @ts-ignore
     let genderValue = genderInput.options[genderInput.selectedIndex].text;
-    // @ts-ignore
     let ageInput = document.getElementById("age-input").value
     if (genderValue === 'Enter Gender') { alert("please enter gender"); return; }
     if (ageInput === '') { alert("please enter age"); return; }
     if (ageInput <= 0) { alert("age cant be less than 1"); return; }
-    if (ageInput >= 100) { alert("age can't be more than 100"); return; }
+    if (ageInput >= 120) { alert("age can't be more than 120"); return; }
     console.log("gender is :" + genderValue)
     console.log("age is: " + ageInput)
-    // let temp:elementModel = {
     let temp = {
         gender: genderValue,
         age: ageInput
     }
-    console.log("temp is: ")
-    console.log(temp)
+
     addElement(temp)
     drawPyramid()
-    // genderInput.options[genderInput.selectedIndex].text = ''
-    // genderValue = ''
-    // ageInput = 0
 };
 
 // building the pyramid sceleton:
-let pyramid
 const buildPyramid = () => {
     pyramid = {
         toTen: [],
@@ -36,32 +30,33 @@ const buildPyramid = () => {
         toForthy: [],
         toSixty: [],
         toEighty: [],
-        toHundard: []
+        toHundard20: []
     }
 }
 buildPyramid()
 
-// const addElement = (element:elementModel) => {
 const addElement = (element) => {
-    // if (!element.gender) { alert("please enter gender"); return; }
-    // if (!element.age) { alert("please enter age"); return; }
-    // if (element.age <= 1) { alert("age cant be less than 1") }
     if (element.age <= 10) { pyramid.toTen = [...pyramid.toTen, element]; }
     else if (element.age <= 20) { pyramid.toTwenty = [...pyramid.toTwenty, element]; }
     else if (element.age <= 40) { pyramid.toForthy = [...pyramid.toForthy, element]; }
     else if (element.age <= 60) { pyramid.toSixty = [...pyramid.toSixty, element]; }
     else if (element.age <= 80) { pyramid.toEighty = [...pyramid.toEighty, element]; }
-    else if (element.age <= 100) { pyramid.toHundard = [...pyramid.toHundard, element]; }
-    // else if (element.age > 100) { alert("age can't be more than 100"); return }
-    // console.log("pyramid is: ")
-    // console.table(pyramid)
+    else if (element.age <= 120) { pyramid.toHundard20 = [...pyramid.toHundard20, element]; }
+}
+
+const print = (count, gender, age) => {
+    document.getElementById("table-body").innerHTML +=
+        `<tr>
+            <th scope="row">${count}</th>
+            <td>${gender}</td>
+            <td>${age}</td>
+        </tr>`
 }
 
 const drawPyramid = () => {
     document.getElementById("pyramid-draw").innerHTML = ""
 
-    var size = Object.keys(pyramid).length;
-    console.log(size)
+    let size = Object.keys(pyramid).length;
     for (let i = 0; i < size; i++) {
         for (let j = 0; j < Object.values(pyramid)[i].length; j++) {
             document.getElementById("pyramid-draw").innerText += "🔺"
@@ -69,3 +64,94 @@ const drawPyramid = () => {
         document.getElementById("pyramid-draw").innerHTML += "<br>"
     }
 }
+
+const getByAge = () => {
+    document.getElementById("table-body").innerHTML = ''
+
+    let searchAgeInput = document.getElementById("age-search").value
+    if (searchAgeInput === '') { alert('please enter age'); return; }
+
+    let size = Object.keys(pyramid).length;
+    let counter = 0
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < Object.values(pyramid)[i].length; j++) {
+
+            let values = Object.values(pyramid)[i]
+            let gender = values[j].gender
+            let age = values[j].age
+            console.log(gender)
+            console.log(age)
+            if (age === searchAgeInput) {
+                print(++counter, gender, age)
+            }
+        }
+    }
+}
+
+const getByGender = () => {
+    document.getElementById("table-body").innerHTML = ''
+
+    let temp = document.getElementById("gender-search")
+    let searchGenderInput = temp.options[temp.selectedIndex].text
+
+    if (searchGenderInput === "Choose Gender") {
+        alert("please enter gender")
+        return;
+    }
+
+    let size = Object.keys(pyramid).length;
+    let counter = 0
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < Object.values(pyramid)[i].length; j++) {
+            let values = Object.values(pyramid)[i]
+            let gender = values[j].gender
+            let age = values[j].age
+            console.log(gender)
+            console.log(age)
+            if (gender === searchGenderInput) {
+                print(++counter, gender, age)
+            }
+        }
+    }
+}
+const getByAgeAndGender = () => {
+    document.getElementById("table-body").innerHTML = ''
+    let searchAgeInput = document.getElementById("age-search").value
+    let temp = document.getElementById("gender-search")
+    let searchGenderInput = temp.options[temp.selectedIndex].text
+
+    if (searchGenderInput === "Choose Gender") { alert("please enter gender"); return; }
+    if (searchAgeInput === '') { alert('please enter age'); return; }
+
+
+    let size = Object.keys(pyramid).length;
+    let counter = 0
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < Object.values(pyramid)[i].length; j++) {
+            let values = Object.values(pyramid)[i]
+            let gender = values[j].gender
+            let age = values[j].age
+            if (gender === searchGenderInput && age === searchAgeInput) {
+                print(++counter, gender, age)
+            }
+        }
+    }
+}
+
+const getAll = () => {
+    document.getElementById("table-body").innerHTML = ''
+
+    let size = Object.keys(pyramid).length;
+    let counter = 0
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < Object.values(pyramid)[i].length; j++) {
+            let values = Object.values(pyramid)[i]
+            let gender = values[j].gender
+            let age = values[j].age
+            console.log(gender)
+            console.log(age)
+            print(++counter, gender, age)
+        }
+    }
+}
+
